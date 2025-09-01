@@ -2,6 +2,8 @@ namespace pryRomero_AppRegistroVenta
 {
     public partial class frmRegistroVenta : Form
     {
+        private const string  = "";
+
         public frmRegistroVenta()
         {
             InitializeComponent();
@@ -20,6 +22,27 @@ namespace pryRomero_AppRegistroVenta
         private void frmRegistroVenta_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void lblFecha_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblRegistrar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbProducto_TextChanged(object sender, EventArgs e)
+        {
+            if (cmbProducto.SelectedIndex = )
+            {
+
+            }
+            {
+
+            }
         }
     }
 }

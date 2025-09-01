@@ -32,13 +32,13 @@
             lblProducto = new Label();
             lblCantidad = new Label();
             lblPrecioUnitario = new Label();
-            numericUpDown1 = new NumericUpDown();
-            numericUpDown2 = new NumericUpDown();
-            dateTimePicker1 = new DateTimePicker();
+            cmbCantidad = new NumericUpDown();
+            cmbFecha = new DateTimePicker();
             lblRegistrar = new Button();
-            comboBox1 = new ComboBox();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+            cmbProducto = new ComboBox();
+            lblCancelar = new Button();
+            cmbPrecioUsuario = new MaskedTextBox();
+            ((System.ComponentModel.ISupportInitialize)cmbCantidad).BeginInit();
             SuspendLayout();
             // 
             // lblFecha
@@ -50,7 +50,7 @@
             lblFecha.Size = new Size(95, 40);
             lblFecha.TabIndex = 0;
             lblFecha.Text = "Fecha";
-            lblFecha.Click += label1_Click;
+            lblFecha.Click += lblFecha_TextChanged;
             // 
             // lblProducto
             // 
@@ -85,57 +85,72 @@
             lblPrecioUnitario.Text = "Precio unitario";
             lblPrecioUnitario.Click += label2_Click;
             // 
-            // numericUpDown1
+            // cmbCantidad
             // 
-            numericUpDown1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            numericUpDown1.Location = new Point(338, 186);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(200, 33);
-            numericUpDown1.TabIndex = 4;
+            cmbCantidad.Enabled = false;
+            cmbCantidad.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbCantidad.Location = new Point(338, 186);
+            cmbCantidad.Name = "cmbCantidad";
+            cmbCantidad.Size = new Size(200, 33);
+            cmbCantidad.TabIndex = 4;
             // 
-            // numericUpDown2
+            // cmbFecha
             // 
-            numericUpDown2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            numericUpDown2.Location = new Point(338, 260);
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(200, 33);
-            numericUpDown2.TabIndex = 5;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(338, 42);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 8;
+            cmbFecha.Location = new Point(338, 42);
+            cmbFecha.Name = "cmbFecha";
+            cmbFecha.Size = new Size(200, 23);
+            cmbFecha.TabIndex = 8;
             // 
             // lblRegistrar
             // 
-            lblRegistrar.Location = new Point(613, 367);
+            lblRegistrar.Enabled = false;
+            lblRegistrar.Location = new Point(367, 350);
             lblRegistrar.Name = "lblRegistrar";
             lblRegistrar.Size = new Size(149, 46);
             lblRegistrar.TabIndex = 9;
             lblRegistrar.Text = "Registrar";
             lblRegistrar.UseVisualStyleBackColor = true;
+            lblRegistrar.Click += lblRegistrar_Click;
             // 
-            // comboBox1
+            // cmbProducto
             // 
-            comboBox1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(338, 111);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(200, 33);
-            comboBox1.TabIndex = 10;
+            cmbProducto.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbProducto.FormattingEnabled = true;
+            cmbProducto.Location = new Point(338, 111);
+            cmbProducto.Name = "cmbProducto";
+            cmbProducto.Size = new Size(200, 33);
+            cmbProducto.TabIndex = 10;
+            cmbProducto.TextChanged += cmbProducto_TextChanged;
+            // 
+            // lblCancelar
+            // 
+            lblCancelar.Location = new Point(617, 350);
+            lblCancelar.Name = "lblCancelar";
+            lblCancelar.Size = new Size(149, 46);
+            lblCancelar.TabIndex = 11;
+            lblCancelar.Text = "Cancelar";
+            lblCancelar.UseVisualStyleBackColor = true;
+            // 
+            // cmbPrecioUsuario
+            // 
+            cmbPrecioUsuario.Enabled = false;
+            cmbPrecioUsuario.Location = new Point(338, 277);
+            cmbPrecioUsuario.Mask = "00000";
+            cmbPrecioUsuario.Name = "cmbPrecioUsuario";
+            cmbPrecioUsuario.Size = new Size(200, 23);
+            cmbPrecioUsuario.TabIndex = 12;
             // 
             // frmRegistroVenta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(comboBox1);
+            Controls.Add(cmbPrecioUsuario);
+            Controls.Add(lblCancelar);
+            Controls.Add(cmbProducto);
             Controls.Add(lblRegistrar);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(numericUpDown2);
-            Controls.Add(numericUpDown1);
+            Controls.Add(cmbFecha);
+            Controls.Add(cmbCantidad);
             Controls.Add(lblPrecioUnitario);
             Controls.Add(lblCantidad);
             Controls.Add(lblProducto);
@@ -143,8 +158,7 @@
             Name = "frmRegistroVenta";
             Text = "Registro de Venta";
             Load += frmRegistroVenta_Load;
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cmbCantidad).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -155,11 +169,12 @@
         private Label lblProducto;
         private Label lblCantidad;
         private Label lblPrecioUnitario;
-        private NumericUpDown numericUpDown1;
-        private NumericUpDown numericUpDown2;
+        private NumericUpDown cmbCantidad;
         private TextBox textBox1;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker cmbFecha;
         private Button lblRegistrar;
-        private ComboBox comboBox1;
+        private ComboBox cmbProducto;
+        private Button lblCancelar;
+        private MaskedTextBox cmbPrecioUsuario;
     }
 }
